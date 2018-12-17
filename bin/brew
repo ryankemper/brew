@@ -1,6 +1,9 @@
 #!/bin/bash
 set +o posix
 
+export LPURP='\033[1;35m'
+export    NC='\033[0m'
+
 # Fail fast with concise message when cwd does not exist
 if ! [[ -d "$PWD" ]]; then
   echo "Error: The current working directory doesn't exist, cannot proceed." >&2
@@ -81,6 +84,8 @@ then
 
     FILTERED_ENV+=( "${VAR}=${!VAR}" )
   done
+
+  printf "\n[my debug] about to: ${LPURP} exec /usr/bin/env -i \"${FILTERED_ENV[@]}\" /bin/bash \"$HOMEBREW_LIBRARY/Homebrew/brew.sh\" \"$@\" ${NC}\n"
 
   exec /usr/bin/env -i "${FILTERED_ENV[@]}" /bin/bash "$HOMEBREW_LIBRARY/Homebrew/brew.sh" "$@"
 else

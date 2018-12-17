@@ -1,3 +1,8 @@
+# My color additions
+export LPURP='\033[1;35m'
+export    NC='\033[0m'
+
+
 # Force UTF-8 to avoid encoding issues for users with broken locale settings.
 if [[ "$(locale charmap 2>/dev/null)" != "UTF-8" ]]
 then
@@ -441,6 +446,9 @@ then
   # Don't need shellcheck to follow this `source`.
   # shellcheck disable=SC1090
   source "$HOMEBREW_BASH_COMMAND"
+
+  printf "\n[my debug] \$HOMEBREW_BASH_COMMAND=${LPURP}$HOMEBREW_BASH_COMMAND${NC}\n\n"
+
   { update-preinstall; "homebrew-$HOMEBREW_COMMAND" "$@"; exit $?; }
 else
   # Don't need shellcheck to follow this `source`.

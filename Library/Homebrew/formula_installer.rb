@@ -227,8 +227,9 @@ class FormulaInstaller
         message = nil
       else
         # some other version is already installed *and* linked
+        puts "debug"
         message += <<~EOS
-          To install #{formula.pkg_version}, first run `brew unlink #{formula.name}`
+          [debug] To install #{formula.pkg_version}, first run `brew unlink #{formula.name}`
         EOS
       end
       raise CannotInstallFormulaError, message if message

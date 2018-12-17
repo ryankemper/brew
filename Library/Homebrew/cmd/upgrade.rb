@@ -55,6 +55,7 @@ module Homebrew
           onoe "#{f.full_specified_name} #{version} already installed"
         end
       end
+      puts "outdated = #{outdated}, outdated.empty? = #{outdated.empty?}"
       exit 1 if outdated.empty?
     end
 
