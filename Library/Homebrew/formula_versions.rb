@@ -18,6 +18,8 @@ class FormulaVersions
     @entry_name = @path.relative_path_from(repository).to_s
     @current_formula = formula
     @formula_at_revision = {}
+
+    puts "[my debug] Initialized new formula #{formula} with @name #{@name}, @path #{@path}, @repository #{@repository}, @entry_name #{@entry_name}, @current_formula #{@current_formula}, @formula_at_revision #{@formula_at_revision}\n"
   end
 
   def rev_list(branch)
