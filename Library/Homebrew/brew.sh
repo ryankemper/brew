@@ -447,7 +447,7 @@ then
   # shellcheck disable=SC1090
   source "$HOMEBREW_BASH_COMMAND"
 
-  printf "\n[my debug] \$HOMEBREW_BASH_COMMAND=${LPURP}$HOMEBREW_BASH_COMMAND${NC}\n\n"
+  printf "\n[Library/Homebrew/brew.sh] \$HOMEBREW_BASH_COMMAND=${LPURP}$HOMEBREW_BASH_COMMAND${NC}\n\n"
 
   { update-preinstall; "homebrew-$HOMEBREW_COMMAND" "$@"; exit $?; }
 else

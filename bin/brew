@@ -85,7 +85,7 @@ then
     FILTERED_ENV+=( "${VAR}=${!VAR}" )
   done
 
-  printf "\n[my debug] about to: ${LPURP} exec /usr/bin/env -i \"${FILTERED_ENV[@]}\" /bin/bash \"$HOMEBREW_LIBRARY/Homebrew/brew.sh\" \"$@\" ${NC}\n"
+  printf "\n[bin/brew debug] about to: ${LPURP} exec /usr/bin/env -i \"${FILTERED_ENV[@]}\" /bin/bash \"$HOMEBREW_LIBRARY/Homebrew/brew.sh\" \"$@\" ${NC}\n"
 
   exec /usr/bin/env -i "${FILTERED_ENV[@]}" /bin/bash "$HOMEBREW_LIBRARY/Homebrew/brew.sh" "$@"
 else

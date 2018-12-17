@@ -228,7 +228,7 @@ class FormulaInstaller
       else
         # some other version is already installed *and* linked
         message += <<~EOS
-          [my debug] To install #{formula.pkg_version}, first run `brew unlink #{formula.name}`
+          [Library/Homebrew/formula_installer.rb debug] To install #{formula.pkg_version}, first run `brew unlink #{formula.name}`
         EOS
       end
       raise CannotInstallFormulaError, message if message

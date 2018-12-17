@@ -31,11 +31,11 @@ module Homebrew
   module_function
 
   def upgrade
-    puts "\n[my debug] beginning of Homebrew::Upgrade\n"
+    puts "\n[Library/homebrew/cmd/upgrade.rb debug] beginning of Homebrew::Upgrade\n"
     FormulaInstaller.prevent_build_flags unless DevelopmentTools.installed?
 
     Install.perform_preinstall_checks
-    puts "\n[my debug] finished Install.perform_preinstall_checks\n"
+    puts "\n[Library/homebrew/cmd/upgrade.rb debug] finished Install.perform_preinstall_checks\n"
 
     if ARGV.named.empty?
       outdated = Formula.installed.select do |f|
@@ -50,17 +50,17 @@ module Homebrew
 
       (ARGV.resolved_formulae - outdated).each do |f|
         versions = f.installed_kegs.map(&:version)
-        puts "\n[my debug] versions = #{versions}\n"
+        puts "\n[Library/homebrew/cmd/upgrade.rb debug] versions = #{versions}\n"
         if versions.empty?
-          puts "\n[my debug] versions.empty? = true\n"
+          puts "\n[Library/homebrew/cmd/upgrade.rb debug] versions.empty? = true\n"
           onoe "#{f.full_specified_name} not installed"
         else
-          puts "\n[my debug] versions.max = #{versions.max}\n"
+          puts "\n[Library/homebrew/cmd/upgrade.rb debug] versions.max = #{versions.max}\n"
           version = versions.max
           onoe "#{f.full_specified_name} #{version} already installed"
         end
       end
-      puts "[my debug] outdated = #{outdated}, outdated.empty? = #{outdated.empty?}"
+      puts "[Library/homebrew/cmd/upgrade.rb debug] outdated = #{outdated}, outdated.empty? = #{outdated.empty?}"
       exit 1 if outdated.empty?
     end
 
