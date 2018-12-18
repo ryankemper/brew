@@ -57,6 +57,9 @@ module Homebrew
     else
       ARGV.resolved_formulae
     end
+    puts "\n[Library/Homebrew/cmd/outdated.rb => outdated DEBUG] formulae = #{formulae}\n\n"
+
+
     if args.json == "v1"
       outdated = print_outdated_json(formulae)
     else
