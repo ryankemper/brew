@@ -38,12 +38,15 @@ module Homebrew
     puts "\n[Library/homebrew/cmd/upgrade.rb debug] finished Install.perform_preinstall_checks\n"
 
     if ARGV.named.empty?
+      puts "\n[Library/homebrew/cmd/upgrade.rb debug] we hit this branch because ARGV.named.empty? = #{ARGV.named.empty?} (meaning we didn't specify a specific formula to upgrade)\n"
       outdated = Formula.installed.select do |f|
         f.outdated?(fetch_head: ARGV.fetch_head?)
       end
 
       exit 0 if outdated.empty?
     else
+      puts "\n[Library/homebrew/cmd/upgrade.rb debug] we hit this branch because ARGV.named = #{ARGV.named}\n"
+
       outdated = ARGV.resolved_formulae.select do |f|
         f.outdated?(fetch_head: ARGV.fetch_head?)
       end
