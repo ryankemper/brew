@@ -173,6 +173,7 @@ class Formula
 
   # @private
   def initialize(name, path, spec, alias_path: nil)
+    puts "[Library/Homebrew/formula.rb debug] hit initialize(name=#{name}, path=#{path}, spec=#{spec}, alias_path=#{alias_path})"
     @name = name
     @path = path
     @alias_path = alias_path
@@ -187,6 +188,9 @@ class Formula
     else
       Tap.from_path(path)
     end
+    puts "[Library/Homebrew/formula.rb => initialize #{@name} DEBUG] @tap=#{@tap}"
+
+
 
     @full_name = full_name_with_optional_tap(name)
     @full_alias_name = full_name_with_optional_tap(@alias_name)
@@ -203,9 +207,15 @@ class Formula
     else
       :stable
     end
+
+    puts "[Library/Homebrew/formula.rb => initialize #{@name} DEBUG] @active_spec=#{@active_spec}, @active_spec_sym=#{@active_spec_sym}"
+
+
     validate_attributes!
     @build = active_spec.build
+    puts "[Library/Homebrew/formula.rb => initialize #{@name} DEBUG] @build=#{@build}"
     @pin = FormulaPin.new(self)
+    puts "[Library/Homebrew/formula.rb => initialize #{@name} DEBUG] @pin=#{@pin}"
     @follow_installed_alias = true
     @prefix_returns_versioned_prefix = false
     @oldname_lock = nil
@@ -1185,6 +1195,7 @@ class Formula
   end
 
   def _outdated_kegs(options = {})
+    puts "[Library/Homebrew/formula.rb debug] hit _outdated_kegs function with options=#{options}"
     all_kegs = []
 
     installed_kegs.each do |keg|
@@ -1196,6 +1207,7 @@ class Formula
       next if version_scheme > tab.version_scheme
       next if version_scheme == tab.version_scheme && pkg_version > version
 
+      puts "[Library/Homebrew/formula.rb debug] follow_installed_alias? = #{follow_installed_alias?}, new_formula_available? = #{new_formula_available?}"
       # don't consider this keg current if there's a newer formula available
       next if follow_installed_alias? && new_formula_available?
 
@@ -1208,6 +1220,7 @@ class Formula
     all_kegs.concat old_installed_formulae.flat_map(&:installed_kegs)
 
     head_version = latest_head_version
+    puts "[Library/Homebrew/formula.rb debug] head_version = #{head_version}"
     if head_version && !head_version_outdated?(head_version, options)
       []
     else
